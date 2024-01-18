@@ -5,7 +5,7 @@ Before all
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y git zsh curl libfuse2 ca-certificates gnupg
+sudo apt-get install -y git zsh curl fzf jq libfuse2 ca-certificates gnupg
 git config --global user.name "Przemyslaw Papla"
 git config --global user.email "przemekpapla@gmail.com"
 ssh-keygen
@@ -20,6 +20,8 @@ ssh-keygen
 ```shell
 chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
 ```shell
@@ -74,4 +76,20 @@ newgrp docker
 
 TODO
 
+## K8S
+
+```shell
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update && sudo apt-get install -y kubectl
+# snap install kubectl --classic
+```
+
+```shell
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update && sudo apt-get install -y helm
+# sudo snap install helm --classic
+```
 
