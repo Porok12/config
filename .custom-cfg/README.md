@@ -5,7 +5,7 @@ Before all
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y git zsh curl fzf jq libfuse2 ca-certificates gnupg
+sudo apt-get install -y git zsh curl fzf jq vim libfuse2 ca-certificates gnupg
 git config --global user.name "Przemyslaw Papla"
 git config --global user.email "przemekpapla@gmail.com"
 ssh-keygen
@@ -86,6 +86,20 @@ sudo apt-get update && sudo apt-get install -y kubectl
 ```
 
 ```shell
+sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+# ahmetb/kubectx path:completion kind:fpath ?
+
+# mkdir -p ~/.oh-my-zsh/custom/completions
+#chmod -R 755 ~/.oh-my-zsh/custom/completions
+#ln -s /opt/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/custom/completions/_kubectx.zsh
+#ln -s /opt/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/custom/completions/_kubens.zsh
+#echo "fpath=($ZSH/custom/completions $fpath)" >> ~/.zshrc
+```
+
+```shell
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
 sudo apt-get install apt-transport-https --yes
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
@@ -93,3 +107,40 @@ sudo apt-get update && sudo apt-get install -y helm
 # sudo snap install helm --classic
 ```
 
+```shell
+export KUBECM_VERSION=0.27.1
+curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v${KUBECM_VERSION}/kubecm_v${KUBECM_VERSION}_Linux_x86_64.tar.gz
+tar -zxvf kubecm.tar.gz kubecm
+sudo mv kubecm /usr/local/bin/
+```
+
+```shell
+sudo snap install k9s
+```
+
+## CLI
+
+```shell
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update && sudo apt install -y gh
+
+# https://gitlab.com/gitlab-org/cli/-/blob/main/README.md#installation
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt-get update && sudo apt-get install -y google-cloud-cli
+```
+
+## Other
+
+```shell
+sudo apt install speech-dispatcher
+```
