@@ -5,7 +5,7 @@ Before all
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y git zsh curl fzf jq vim libfuse2 ca-certificates gnupg python3-pip
+sudo apt-get install -y git zsh curl fzf jq vim libfuse2 ca-certificates gnupg nmap python3-pip
 git config --global user.name "Przemyslaw Papla"
 git config --global user.email "przemekpapla@gmail.com"
 ssh-keygen
