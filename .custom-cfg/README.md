@@ -5,7 +5,7 @@ Before all
 ```shell
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y git zsh curl fzf jq vim libfuse2 ca-certificates gnupg
+sudo apt-get install -y git zsh curl fzf jq vim libfuse2 ca-certificates gnupg python3-pip
 git config --global user.name "Przemyslaw Papla"
 git config --global user.email "przemekpapla@gmail.com"
 ssh-keygen
@@ -150,9 +150,17 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.clou
 sudo apt-get update && sudo apt-get install -y google-cloud-cli
 ```
 
+```shell
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install -y vlt
+```
+
 ## Other
 
 ```shell
+sudo apt-get install -y webp-pixbuf-loader
 sudo apt-get install -y speech-dispatcher
 sudo apt-get install -y fonts-powerline
+# https://keystore-explorer.org/downloads.html
 ```
